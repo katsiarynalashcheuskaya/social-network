@@ -1,0 +1,10 @@
+.app-wrapper-content {
+    grid-area: c;
+    background-color: darkgray;
+}
+
+
+.backgroundImg{
+    height: 100%;
+
+}
