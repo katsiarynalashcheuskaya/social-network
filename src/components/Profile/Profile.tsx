@@ -1,29 +1,20 @@
 import React from 'react';
-import './Profile.css'
+import s from './Profile.module.css'
+import background from './background.jpeg'
+import MyPosts from "./My Posts/MyPosts";
 
 const Profile = () => {
     return (
-        <div className="app-wrapper-content">
+        <div>
             <div>
-                <img className='backgroundImg'
-                     src='https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1024px-Image_created_with_a_mobile_phone.png'
-                     alt='fhgjbhkjnl'/>
+                <img className={s.backgroundImg}
+                     src={background}
+                     alt='background img'/>
             </div>
-            <div>
+            <div className={s.descriptionBlock}>
                 ava+description
             </div>
-            <div>
-                My posts
-                <div>
-                    New post
-                </div>
-                <div>
-                    post 1
-                </div>
-                <div>
-                    post 2
-                </div>
-            </div>
+            <MyPosts/>
         </div>
     );
 };

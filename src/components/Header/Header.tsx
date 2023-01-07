@@ -1,10 +1,12 @@
 import React from 'react';
-import './Header.css'
+import s from'./Header.module.css'
+import logo from './logo.svg'
 
 const Header = () => {
     return (
-        <header className="header">
-            <img src='https://i.pinimg.com/550x/99/f7/0f/99f70fe7d427e6c6cf994260ff04f24b.jpg' alt='logo'/>
+        <header className={s.header}>
+            <img src={logo} alt='logo'/>
+            <div className={s.brand}>Samurai network</div>
         </header>
     );
 };
