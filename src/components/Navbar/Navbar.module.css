@@ -1,14 +1,43 @@
 .nav {
     grid-area: n;
-    background-color: #76a4a4;
-    padding: 20px;
+    background: #FFFFFF;
+    margin-top: 30px;
+    min-height: 700px;
+    min-width: 150px;
+    height: 870px;
+    border-right: 1px solid #F0F7FF;
+}
+
+.navbar {
+margin-left: 20px;
 }
 
 .item a {
-    color: white;
+    color:  #788292;
     text-decoration: none;
 }
 
+.item {
+margin-bottom: 5px;
+}
+
 .item a.active{
-    color: gray;
+    color:  #788292;
+    font-weight: bold;
+}
+
+.friends {
+    margin-top: 50px;
+
+}
+
+.text {
+    color:  #788292;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+.friendsBlock {
+    color: #106966;
+    font-weight: bold;
 }

@@ -1,20 +1,19 @@
 import React from 'react';
-import s from './Profile.module.css'
-import background from './background.jpeg'
 import MyPosts from "./My Posts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import {ProfilePageType} from "../redux/state";
 
-const Profile = () => {
+type ProfileType = {
+    profile: ProfilePageType
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+}
+
+const Profile = (props: ProfileType) => {
     return (
         <div>
-            <div>
-                <img className={s.backgroundImg}
-                     src={background}
-                     alt='background img'/>
-            </div>
-            <div className={s.descriptionBlock}>
-                ava+description
-            </div>
-            <MyPosts/>
+            <ProfileInfo/>
+            <MyPosts profile={props.profile} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
         </div>
     );
 };
