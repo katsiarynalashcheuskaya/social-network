@@ -13,20 +13,21 @@ type AppType = {
 }
 
 const App: React.FC<AppType> = (props) => {
-    //const state = props.store.getState;
+    const {state, dispatch} = props
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
-                <Navbar sidebar={props.state.sidebarBlock}/>
+                <Navbar sidebar={state.sidebarBlock}/>
                 <div className="app-wrapper-content">
                     <Route path='/profile' render={()=>
-                        <Profile profile={props.state.profilePage}
-                                 dispatch={props.dispatch}
+                        <Profile profile={state.profilePage}
+                                 dispatch={dispatch}
                         />}/>
-                    <Route path='/dialogs' /*render={()=>
-                        <Dialogs dialogs={props.state.dialogsPage}
-                        />}*//>
+                    <Route path='/dialogs' render={()=>
+                        <Dialogs dialogs={state.dialogsPage}
+                                 dispatch={dispatch}
+                        />}/>
                 </div>
             </div>
         </BrowserRouter>

@@ -1,3 +1,7 @@
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+import sidebarReducer from "./sidebarReducer";
+
 const store: StoreType = {
     _state: {
         profilePage: {
@@ -44,7 +48,8 @@ const store: StoreType = {
                 {id: 3, message: 'Wooooooow'},
                 {id: 4, message: 'Yoooooo'},
                 {id: 5, message: 'Hohohohoh'}
-            ]
+            ],
+            newMessageText: ''
         },
         sidebarBlock: {
             sidebar: [
@@ -90,41 +95,28 @@ const store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            const newPost = {
-                id: new Date().getTime(),
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            };
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = ''
-            this._rerenderEntireTree();
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText;
-            this._rerenderEntireTree();
-        }
-    },
-
-    addMessage(textMessage: string) {
-        const newMessage: MessageType = {
-            id: new Date().getTime(),
-            message: textMessage
-        };
-        this._state.dialogsPage.messages.push(newMessage);
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.sidebarBlock = sidebarReducer(this._state.sidebarBlock, action);
+        this._rerenderEntireTree(this._state);
     }
 }
 
+export const sendMessageAC = () => ({type: "SEND-MESSAGE"} as const)
+export const updateMessageTextAC = (newText: string) => ({type: "UPDATE-NEW-MESSAGE-TEXT", newText: newText} as const)
 export const addPostAC = () => ({type: "ADD-POST"} as const)
-export const UpdatePostTextAC = (newText: string) => ({
+export const updatePostTextAC = (newText: string) => ({
     type: "UPDATE-NEW-POST-TEXT", newText: newText
 } as const)
 
-export type ActionsType = ReturnType<typeof addPostAC> | ReturnType<typeof UpdatePostTextAC>
+export type ActionsType =
+    ReturnType<typeof addPostAC> | ReturnType<typeof updatePostTextAC> |
+    ReturnType<typeof updateMessageTextAC> | ReturnType<typeof sendMessageAC>
+
 export type StoreType = {
     _state: RootStateType;
-    addMessage: (textMessage: string) => void;
     subscribe: (observer: () => void) => void;
-    _rerenderEntireTree: () => void;
+    _rerenderEntireTree: (state: RootStateType) => void;
     getState: () => RootStateType;
     dispatch: (action: ActionsType) => void
 }
@@ -149,6 +141,7 @@ export type ProfilePageType = {
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageText: string
 }
 export type SidebarType = {
     id: number
