@@ -1,15 +1,10 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
 import s from './Navbar.module.css'
-import {SidebarBlockType} from "../redux/state";
 import FriendsBar from "./FriendsBar/FriendsBar";
 
-type NavbarType = {
-    sidebar: SidebarBlockType
-}
-
-const Navbar = (props: NavbarType) => {
-    let friendsBarElement = props.sidebar.sidebar.map(el => <FriendsBar key={el.id} id={el.id} name={el.name} ava={el.ava}/>)
+const Navbar = () => {
+    /*let friendsBarElement = sidebar.sidebar.map(el => <FriendsBar key={el.id} id={el.id} name={el.name} ava={el.ava}/>)*/
     return (
         <nav className={s.nav}>
             <div className={s.navbar}>
@@ -31,7 +26,7 @@ const Navbar = (props: NavbarType) => {
                 </div>
                 <div className={s.friends}>
                     <div><span className={s.text}>My friends:</span></div>
-                    <div className={s.friendsBlock}>{friendsBarElement}</div>
+                    <div className={s.friendsBlock}>{/*{friendsBarElement}*/}</div>
                 </div>
         </nav>
     );

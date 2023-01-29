@@ -1,4 +1,5 @@
-import {ActionsType, SidebarBlockType} from "./state";
+import {SidebarType} from "../../index";
+import {ActionsType} from "./redux-store";
 
 const initialState:SidebarBlockType =  {
     sidebar: [
@@ -29,6 +30,10 @@ const initialState:SidebarBlockType =  {
         },
 
     ]
+}
+
+export type SidebarBlockType = {
+    sidebar: Array<SidebarType>
 }
 
 const sidebarReducer = (state: SidebarBlockType = initialState, action: ActionsType): SidebarBlockType => {

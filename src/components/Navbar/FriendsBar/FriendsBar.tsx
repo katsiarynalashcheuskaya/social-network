@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './FriendsBar.module.css'
-import {SidebarType} from "../../redux/state";
+import {SidebarType} from "../../../index";
+
 
 const FriendsBar = (props:SidebarType) => {
     return (

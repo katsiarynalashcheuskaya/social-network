@@ -1,8 +1,8 @@
-import profileReducer from "./profileReducer";
-import dialogsReducer from "./dialogsReducer";
+import profileReducer, {addPostAC, updatePostTextAC} from "./profileReducer";
+import dialogsReducer, {sendMessageAC, updateMessageTextAC} from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
 
-const store: StoreType = {
+/*const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -98,29 +98,24 @@ const store: StoreType = {
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
         this._state.sidebarBlock = sidebarReducer(this._state.sidebarBlock, action);
-        this._rerenderEntireTree(this._state);
+        this._rerenderEntireTree();
     }
-}
+}*/
 
-export const sendMessageAC = () => ({type: "SEND-MESSAGE"} as const)
-export const updateMessageTextAC = (newText: string) => ({type: "UPDATE-NEW-MESSAGE-TEXT", newText: newText} as const)
-export const addPostAC = () => ({type: "ADD-POST"} as const)
-export const updatePostTextAC = (newText: string) => ({
-    type: "UPDATE-NEW-POST-TEXT", newText: newText
-} as const)
-
+/*
 export type ActionsType =
     ReturnType<typeof addPostAC> | ReturnType<typeof updatePostTextAC> |
     ReturnType<typeof updateMessageTextAC> | ReturnType<typeof sendMessageAC>
+*/
 
-export type StoreType = {
+/*export type StoreType = {
     _state: RootStateType;
     subscribe: (observer: () => void) => void;
-    _rerenderEntireTree: (state: RootStateType) => void;
+    _rerenderEntireTree: () => void;
     getState: () => RootStateType;
-    dispatch: (action: ActionsType) => void
-}
-export type MessageType = {
+    dispatch: (action: ActionsType) =>  void
+}*/
+/*export type MessageType = {
     id: number
     message: string
 }
@@ -133,28 +128,29 @@ export type PostType = {
     id: number
     message: string
     likesCount: number
-}
-export type ProfilePageType = {
+}*/
+/*export type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
-}
-export type DialogPageType = {
+}*/
+/*export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageText: string
-}
-export type SidebarType = {
+}*/
+/*export type SidebarType = {
     id: number
     name: string
     ava: string
-}
-export type SidebarBlockType = {
+}*/
+/*export type SidebarBlockType = {
     sidebar: Array<SidebarType>
-}
-export type RootStateType = {
+}*/
+/*export type RootStateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogPageType
     sidebarBlock: SidebarBlockType
-}
+}*/
 
-export default store;
+/*
+export default store;*/
