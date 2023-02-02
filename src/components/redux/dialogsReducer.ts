@@ -1,4 +1,5 @@
 import {ActionsType} from "./redux-store";
+import messages from "../Dialogs/Messages/Messages";
 
 export type MessageType = {
     id: number
@@ -57,12 +58,16 @@ export type InitialStateType = typeof initialState
 const dialogsReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-TEXT":
-            state.newMessageText = action.newText;
-            return state;
+            return {...state,
+                newMessageText: action.newText};
         case "SEND-MESSAGE":
-            state.messages.push({id: new Date().getTime(), message: state.newMessageText});
-            state.newMessageText = '';
-            return state;
+            let text = state.newMessageText
+           return  {
+                ...state,
+                newMessageText: '',
+                messages: [...state.messages,
+                    {id: new Date().getTime(), message: text}]
+            };
         default:
             return state;
     }

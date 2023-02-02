@@ -38,7 +38,8 @@ export type SidebarBlockType = {
 
 const sidebarReducer = (state: SidebarBlockType = initialState, action: ActionsType): SidebarBlockType => {
 
-    return state
+            return state
+
 }
 
 export default sidebarReducer;
