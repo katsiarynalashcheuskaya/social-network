@@ -1,5 +1,4 @@
 import {ActionsType} from "./redux-store";
-import messages from "../Dialogs/Messages/Messages";
 
 export type MessageType = {
     id: number
