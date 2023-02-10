@@ -27,11 +27,17 @@ const initialState:UsersPageType = {
             followed: false, fullName: 'Dima S.', status: 'I am a boss', location: {city: 'Grodno', country: 'Belarus'}},
         {id: 5, photoUrl: 'https://cdn4.vectorstock.com/i/1000x1000/23/63/man-avatar-icon-flat-vector-19152363.jpg',
             followed: true, fullName: 'Anton M.', status: 'I am a boss', location: {city: 'Kiev', country: 'Ukraine'}}
-    */]
+    */],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 3
 }
 
 export type UsersPageType = {
-    users: UserType[]
+    users: UserType[],
+    pageSize: number;
+    totalUsersCount: number;
+    currentPage: number;
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {
@@ -58,7 +64,15 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsType):
             }
         case 'SET-USERS':{
             return {
-                ...state, users: [...state.users, ...action.users]
+                ...state, users: action.users
+            }}
+        case 'SET-CURRENT-PAGE':{
+            return {
+                ...state, currentPage: action.currentPage
+            }}
+        case 'SET-TOTAL-USERS-COUNT':{
+            return {
+                ...state, totalUsersCount: action.count
             }}
         default:
             return state;
@@ -69,6 +83,12 @@ export const followAC = (userId: number) => ({type: "FOLLOW", userId} as const)
 export const unfollowAC = (userId: number) => ({type: "UNFOLLOW", userId} as const)
 export const setUsersAC = (users: UserType[]) => ({
     type: "SET-USERS", users: users
+} as const)
+export const setCurrentPageAC = (currentPage:number) => ({
+    type: "SET-CURRENT-PAGE", currentPage: currentPage
+} as const)
+export const setTotalUsersCountAC = (totalUsersCount:number) => ({
+    type: "SET-TOTAL-USERS-COUNT", count: totalUsersCount
 } as const)
 
 

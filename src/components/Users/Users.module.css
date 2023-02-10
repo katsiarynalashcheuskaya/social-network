@@ -12,3 +12,12 @@
     flex-direction: column;
 }
 
+.pages {
+    color:  #788292;
+    display: flex;
+}
+
+.selectedPage {
+    font-weight: bold;
+}
+
