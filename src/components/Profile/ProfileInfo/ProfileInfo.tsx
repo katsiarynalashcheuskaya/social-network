@@ -1,8 +1,16 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
 import background from './ttt.webp'
+import Preloader from "../../common/Preloader/Preloader";
 
-const ProfileInfo = () => {
+export type PropsType = {
+    profile: any
+}
+
+const ProfileInfo = (props: PropsType) => {
+    if (!props.profile) {
+        return <Preloader/>
+    }
     return (
         <div>
             <div>
@@ -11,6 +19,7 @@ const ProfileInfo = () => {
                      alt='background img'/>
             </div>
             <div className={s.descriptionBlock}>
+                <img src={props.profile.photos.large}/>
                 ava+description
             </div>
         </div>

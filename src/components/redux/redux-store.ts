@@ -1,15 +1,23 @@
 import {combineReducers, createStore} from "redux";
-import profileReducer, {addPostAC, updatePostTextAC} from "./profileReducer";
-import dialogsReducer, {sendMessageAC, updateMessageTextAC} from "./dialogsReducer";
+import profileReducer, {addPost, setUserProfile, updatePostText} from "./profileReducer";
+import dialogsReducer, {sendMessage, updateMessageText} from "./dialogsReducer";
 import sidebarReducer from "./sidebarReducer";
-import usersReducer, {followAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC, unfollowAC} from "./usersReducer";
+import usersReducer, {
+    follow,
+    setCurrentPage,
+    setIsFetching,
+    setTotalUsersCount,
+    setUsers,
+    unfollow
+} from "./usersReducer";
 
 export type ActionsType =
-    ReturnType<typeof addPostAC> | ReturnType<typeof updatePostTextAC> |
-    ReturnType<typeof updateMessageTextAC> | ReturnType<typeof sendMessageAC> |
-    ReturnType<typeof followAC> | ReturnType<typeof unfollowAC> |
-     ReturnType<typeof setUsersAC> | ReturnType<typeof setCurrentPageAC> |
-     ReturnType<typeof setTotalUsersCountAC>
+    ReturnType<typeof addPost> | ReturnType<typeof updatePostText> |
+    ReturnType<typeof updateMessageText> | ReturnType<typeof sendMessage> |
+    ReturnType<typeof follow> | ReturnType<typeof unfollow> |
+    ReturnType<typeof setUsers> | ReturnType<typeof setCurrentPage> |
+    ReturnType<typeof setTotalUsersCount> | ReturnType<typeof setIsFetching> |
+    ReturnType<typeof setUserProfile>
 
 
 let reducers = combineReducers(

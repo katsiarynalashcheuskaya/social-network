@@ -14,7 +14,6 @@ export type UserType = {
         country: string
     }
 }
-
 const initialState:UsersPageType = {
     users: [
         /*{id: 1, photoUrl: 'https://cdn1.vectorstock.com/i/1000x1000/23/70/man-avatar-icon-flat-vector-19152370.jpg',
@@ -30,14 +29,15 @@ const initialState:UsersPageType = {
     */],
     pageSize: 5,
     totalUsersCount: 0,
-    currentPage: 3
+    currentPage: 1,
+    isFetching: true
 }
-
 export type UsersPageType = {
     users: UserType[],
     pageSize: number;
     totalUsersCount: number;
     currentPage: number;
+    isFetching: boolean
 }
 
 const usersReducer = (state: UsersPageType = initialState, action: ActionsType): UsersPageType => {
@@ -74,21 +74,28 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsType):
             return {
                 ...state, totalUsersCount: action.count
             }}
+        case 'TOGGLE-IS-FETCHING':{
+            return {
+                ...state, isFetching: action.isFetching
+            }}
         default:
             return state;
     }
 }
 
-export const followAC = (userId: number) => ({type: "FOLLOW", userId} as const)
-export const unfollowAC = (userId: number) => ({type: "UNFOLLOW", userId} as const)
-export const setUsersAC = (users: UserType[]) => ({
+export const follow = (userId: number) => ({type: "FOLLOW", userId} as const)
+export const unfollow = (userId: number) => ({type: "UNFOLLOW", userId} as const)
+export const setUsers = (users: UserType[]) => ({
     type: "SET-USERS", users: users
 } as const)
-export const setCurrentPageAC = (currentPage:number) => ({
+export const setCurrentPage = (currentPage:number) => ({
     type: "SET-CURRENT-PAGE", currentPage: currentPage
 } as const)
-export const setTotalUsersCountAC = (totalUsersCount:number) => ({
+export const setTotalUsersCount = (totalUsersCount:number) => ({
     type: "SET-TOTAL-USERS-COUNT", count: totalUsersCount
+} as const)
+export const setIsFetching = (isFetching:boolean) => ({
+    type: "TOGGLE-IS-FETCHING", isFetching
 } as const)
 
 
