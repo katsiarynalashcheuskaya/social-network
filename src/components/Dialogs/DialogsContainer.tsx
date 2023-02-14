@@ -1,8 +1,8 @@
 import React from 'react';
-import {sendMessage, updateMessageText} from "../redux/dialogsReducer";
+import {sendMessage, updateMessageText} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {AppStateType} from "../redux/redux-store";
+import {AppStateType} from "../../redux/redux-store";
 
 /*const DialogsContainer = () => {
     return (

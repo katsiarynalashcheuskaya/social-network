@@ -3,7 +3,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./My Posts/MyPostsContainer";
 
 export type ProfileProps = {
-    profile: any
+    profile: string | null
 }
 
 const Profile = (props: ProfileProps) => {

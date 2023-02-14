@@ -1,4 +1,4 @@
-import {SidebarType} from "../../index";
+import {SidebarType} from "../index";
 import {ActionsType} from "./redux-store";
 
 const initialState:SidebarBlockType =  {
