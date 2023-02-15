@@ -14,13 +14,23 @@ export const usersAPI = {
             .then(response => response.data)
     }
 }
-/*
-export const getUsers = (currentPage = 1, pageSize = 5) => {
-    return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-        .then(response => response.data)
+export const authAPI = {
+    getCurrentUserData () {
+        return instance.get(`https://social-network.samuraijs.com/api/1.0/auth/me`)
+            .then(response => response.data)
+    }
+}
+export const unFollowAPI = {
+    unFollow (id: number) {
+        return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
+            .then(response => response.data)
+    }
+}
+export const followAPI = {
+    follow (id: number) {
+       return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${id}`)
+           .then(response => response.data)
+    }
 }
 
-export const Foll = (currentPage = 1, pageSize = 5) => {
-    return axios.get(`users?page=${currentPage}&count=${pageSize}`)
-        .then(response => response.data)
-}*/
+

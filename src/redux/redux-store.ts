@@ -5,7 +5,7 @@ import sidebarReducer from "./sidebarReducer";
 import usersReducer, {
     follow,
     setCurrentPage,
-    setIsFetching,
+    setIsFetching, setIsFollowingInProgress,
     setTotalUsersCount,
     setUsers,
     unfollow
@@ -18,7 +18,8 @@ export type ActionsType =
     ReturnType<typeof follow> | ReturnType<typeof unfollow> |
     ReturnType<typeof setUsers> | ReturnType<typeof setCurrentPage> |
     ReturnType<typeof setTotalUsersCount> | ReturnType<typeof setIsFetching> |
-    ReturnType<typeof setUserProfile> | ReturnType<typeof setAuthUserData>
+    ReturnType<typeof setUserProfile> | ReturnType<typeof setAuthUserData> |
+    ReturnType<typeof setIsFollowingInProgress>
 
 
 let reducers = combineReducers(

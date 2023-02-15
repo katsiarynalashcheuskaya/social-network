@@ -3,7 +3,7 @@ import {UserType} from "../../redux/usersReducer";
 import userAvatar from '../../assets/images/user-avatar-icon.png'
 import s from "./Users.module.css";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {followAPI, unFollowAPI} from "../../api/api";
 
 type UsersType = {
     users: UserType[]
@@ -12,68 +12,77 @@ type UsersType = {
     pageSize: number;
     totalUsersCount: number;
     currentPage: number;
-    onPageChanged: (pageNumber:number) => void;
+    onPageChanged: (pageNumber: number) => void;
+    setIsFollowingInProgress: (following: boolean, userId: number) => void;
+    followingInProgress: Array<number>
 }
 
-const Users = (props:UsersType) => {
+const Users = (props: UsersType) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
-    for (let i=1; i<=pagesCount; i++) {
+    for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-        return <div className={s.usersContainer}>
-            <div className={s.pages}>
-                {pages.map((p, index) => {
-                    return <span key={index} className={props.currentPage === p ? s.selectedPage : ''}
-                    onClick={(e)=>{props.onPageChanged(p)}}>{p}</span>})
-                }
-            </div>
-            {props.users.map((u, index) =>
-                <div key={index}>
+    return <div className={s.usersContainer}>
+        <div className={s.pages}>
+            {pages.map((p, index) => {
+                return <span key={index} className={props.currentPage === p ? s.selectedPage : ''}
+                             onClick={(e) => {
+                                 props.onPageChanged(p)
+                             }}>{p}</span>
+            })
+            }
+        </div>
+        {props.users.map((u, index) =>
+            <div key={index}>
                 <span>
                     <div>
-                        <NavLink to={'/profile/'+ u.id}>
-                        <img src={u.photos.small != null ? u.photos.small : userAvatar} className={s.usersPhoto}/>
+                        <NavLink to={'/profile/' + u.id}>
+                        <img src={u.photos.small != null ? u.photos.small : userAvatar} className={s.usersPhoto}
+                             alt={'user photo'}/>
                             </NavLink>
                     </div>
                     <div>
                         {u.followed
-                            ? <button onClick={() => {
-                                axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-                                withCredentials: true,
-                                headers: {
-                                    "API-KEY": '8c4679a6-f8d7-42df-b729-d189d06fd7dc'
-                                }})
-                                    .then(response => {
-                                        if (response.data.resultCode !== 0) {
+                            ? <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                      onClick={() => {
+                                props.setIsFollowingInProgress(true, u.id);
+                                unFollowAPI.unFollow(u.id)
+                                    .then(data => {
+                                        if (data.resultCode === 0) {
                                             props.unfollow(u.id)
                                         }
+                                        props.setIsFollowingInProgress(false, u.id);
 
-                                    })}}>Unfollow</button>
-                            :  <button onClick={() => {
-                                axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-                                    withCredentials: true })
-                                    .then(response => {
-                                        if (response.data.resultCode === 0) {
+                                    })
+                            }}>Unfollow</button>
+
+                            : <button disabled={props.followingInProgress.some(id => id === u.id)}
+                                      onClick={() => {
+                                props.setIsFollowingInProgress(true, u.id);
+                                followAPI.follow(u.id)
+                                    .then(data => {
+                                        if (data.resultCode === 0) {
                                             props.follow(u.id)
                                         }
+                                        props.setIsFollowingInProgress(false, u.id);
 
                                     })
                             }}>Follow</button>}
                     </div>
                 </span>
-                    <span>
+                <span>
                     <div>{u.name}</div>
                     <div>{u.status}</div>
                 </span>
-                    <span>
+                <span>
                      <div>{'u.location.city'}</div>
                     <div>{'u.location.country'}</div>
                 </span>
-                </div>)
-            }
+            </div>)
+        }
 
-        </div>
+    </div>
 
 }
 
