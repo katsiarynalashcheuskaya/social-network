@@ -1,18 +1,19 @@
 import {ActionsType} from "./redux-store";
+import {Dispatch} from "redux";
+import {authAPI} from "../api/api";
+import {setIsFetching} from "./usersReducer";
 
 const initialState:DataType = {
     userId: null,
     email: null,
     login: null,
-    isAuth: false/*,
-    isFetching: false*/
+    isAuth: false,
 }
 export type DataType = {
     userId: string | null
     email: string | null
     login: string | null,
-    isAuth: boolean/*,
-    isFetching: boolean*/
+    isAuth: boolean,
 }
 
 const authReducer = (state: DataType = initialState, action: ActionsType): DataType => {
@@ -23,17 +24,25 @@ const authReducer = (state: DataType = initialState, action: ActionsType): DataT
                 ...action.data,
                 isAuth: true
             }
-        /*case 'TOGGLE-IS-FETCHING':{
-            return {
-                ...state/!*, isFetching: action.isFetching*!/
-            }}*/
         default:
             return state;
     }
 }
 
 export const setAuthUserData = (userId: string | null, email: string | null, login: string | null) => ({type: "SET-USER-DATA", data: {userId, email, login}} as const);
-/*export const setIsFetching = (isFetching:boolean) => ({type: "TOGGLE-IS-FETCHING", isFetching} as const)*/
+
+export const setUser = () => {
+    return (dispatch: Dispatch<ActionsType>) => {
+        dispatch(setIsFetching(true));
+        authAPI.getCurrentUserData()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    let {id, login, email} = data.data;
+                    dispatch(setAuthUserData(id, email, login));
+                }
+            })
+    }
+}
 
 
 export default authReducer;

@@ -1,28 +1,8 @@
 import React from 'react';
-import {addPost, updatePostText} from "../../../redux/profileReducer";
+import {addPost, setUserProfile, updatePostText} from "../../../redux/profileReducer";
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
-import {ActionsType, AppStateType} from "../../../redux/redux-store";
-
-/*const MyPostsContainer = () => {
-    return (
-        <StoreContext.Consumer>
-            {
-            (store) => {
-                let state = store.getState();
-                const addNewPostHandler = () => store.dispatch(addPostAC());
-                const onPostChange = (text: string) => {
-                    store.dispatch(updatePostTextAC(text))
-                }
-                return <MyPosts posts={state.profilePage.posts}
-                                updatePostText={onPostChange}
-                                addPost={addNewPostHandler}
-                                newPostText={state.profilePage.newPostText}/>
-            }
-        }
-        </StoreContext.Consumer>
-    );
-};*/
+import {AppStateType} from "../../../redux/redux-store";
 
 let mapStateToProps = (state: AppStateType) => {
     return {
@@ -37,6 +17,8 @@ let mapStateToProps = (state: AppStateType) => {
         }
     }
 }*/
+
+
 
 const MyPostsContainer = connect(mapStateToProps, {addPost, updatePostText})(MyPosts);
 
