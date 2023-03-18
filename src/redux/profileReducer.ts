@@ -1,4 +1,8 @@
 import {ActionsType} from "./redux-store";
+import {Dispatch} from "redux";
+import {setIsFetching} from "./usersReducer";
+import {authAPI, usersAPI} from "../api/api";
+import {setAuthUserData} from "./auth-reducer";
 
 export type PostType = {
     id: number
@@ -46,6 +50,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
             return {...state,
                 profile: action.profile
             }
+
         default:
             return state;
     }
@@ -58,6 +63,15 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
     export const setUserProfile = (profile: string | null) => ({
         type: "SET-USER-PROFILE", profile
     } as const)
+
+
+export const getUserProfile = (userId: string) => {
+    return (dispatch: Dispatch<ActionsType>) => {
+        dispatch(setIsFetching(true));
+        usersAPI.getProfile(userId).then(response =>
+            dispatch(setUserProfile(response.data)));
+    }
+}
 
 
 export default profileReducer;

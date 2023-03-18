@@ -31,10 +31,9 @@ const authReducer = (state: DataType = initialState, action: ActionsType): DataT
 
 export const setAuthUserData = (userId: string | null, email: string | null, login: string | null) => ({type: "SET-USER-DATA", data: {userId, email, login}} as const);
 
-export const setUser = () => {
+export const getAuthUserData = () => {
     return (dispatch: Dispatch<ActionsType>) => {
-        dispatch(setIsFetching(true));
-        authAPI.getCurrentUserData()
+        authAPI.me()
             .then(data => {
                 if (data.resultCode === 0) {
                     let {id, login, email} = data.data;

@@ -2,7 +2,7 @@ import React from "react";
 import {UserType} from "../../redux/usersReducer";
 import userAvatar from '../../assets/images/user-avatar-icon.png'
 import s from "./Users.module.css";
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 
 type UsersType = {
     users: UserType[]

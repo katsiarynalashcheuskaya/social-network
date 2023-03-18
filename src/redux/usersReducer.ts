@@ -1,5 +1,5 @@
 import {ActionsType} from "./redux-store";
-import {followAPI, unFollowAPI, usersAPI} from "../api/api";
+import {usersAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 export type UserType = {
@@ -121,7 +121,7 @@ export const getUsers= (currentPage: number, pageSize: number) => {
 export const follow = (userId: number) => {
     return (dispatch: Dispatch<ActionsType>) => {
         dispatch(setIsFollowingInProgress(true, userId));
-        followAPI.follow(userId)
+        usersAPI.follow(userId)
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(followSuccess(userId));
@@ -133,7 +133,7 @@ export const follow = (userId: number) => {
 export const unFollow = (userId: number) => {
     return (dispatch: Dispatch<ActionsType>) => {
         dispatch(setIsFollowingInProgress(true, userId));
-        unFollowAPI.unFollow(userId)
+        usersAPI.unFollow(userId)
             .then(data => {
                 if (data.resultCode === 0) {
                     dispatch(unFollowSuccess(userId));
