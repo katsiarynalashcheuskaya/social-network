@@ -9,7 +9,7 @@ import {
 } from '../../redux/usersReducer';
 import Users from './Users';
 import Preloader from "../common/Preloader/Preloader";
-import {Redirect} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 export type UsersType = {
     users: UserType[]
@@ -22,7 +22,6 @@ export type UsersType = {
     isFetching: boolean
     followingInProgress: Array<number>
     getUsers: (currentPage: number, pageSize: number) => void
-    isAuth: boolean
 }
 
 class UsersContainer extends React.Component<UsersType> {
@@ -35,7 +34,6 @@ class UsersContainer extends React.Component<UsersType> {
     }
 
     render() {
-        if (!this.props.isAuth) return <Redirect to={"/login"} />
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}
@@ -59,31 +57,9 @@ let mapStateToProps = (state: AppStateType) => {
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
         followingInProgress: state.usersPage.followingInProgress,
-        isAuth: state.auth.isAuth
-
     }
 }
-/*let mapDispatchToProps = (dispatch: (action: ActionsType) =>  void) => {
-    return {
-        follow: (userId: number) => dispatch(followAC(userId)),
-        unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users: UserType[]) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUsersCount: (totalCount: number) => {
-            dispatch(setTotalUsersCountAC(totalCount))
-        },
-        setIsFetching: (isFetching: boolean) => {
-            dispatch(setIsFetchingtAC((isFetching)))
-        }
-    }
-}*/
 
-export default connect(mapStateToProps, {
+export default withAuthRedirect(connect(mapStateToProps, {
     follow, unFollow, setCurrentPage, setIsFollowingInProgress, getUsers
-})(UsersContainer);
+})(UsersContainer));

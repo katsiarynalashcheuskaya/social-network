@@ -3,7 +3,6 @@ import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Messages from "./Messages/Messages";
 import {DialogPageType} from "../../redux/dialogsReducer";
-import {Redirect} from "react-router-dom";
 
 type DialogsType = {
     dialogsPage: DialogPageType
@@ -28,7 +27,7 @@ const Dialogs = (props: DialogsType) => {
                   id={el.id}
                   message={el.message}/>)
 
-    if (!props.isAuth) return <Redirect to={"/login"} />
+   /* if (!props.isAuth) return <Redirect to={"/login"} />*/
 
     return (
         <div className={s.dialogsBlock}>

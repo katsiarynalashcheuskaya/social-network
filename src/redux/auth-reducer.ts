@@ -1,7 +1,6 @@
 import {ActionsType} from "./redux-store";
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
-import {setIsFetching} from "./usersReducer";
 
 const initialState:DataType = {
     userId: null,
@@ -29,7 +28,8 @@ const authReducer = (state: DataType = initialState, action: ActionsType): DataT
     }
 }
 
-export const setAuthUserData = (userId: string | null, email: string | null, login: string | null) => ({type: "SET-USER-DATA", data: {userId, email, login}} as const);
+export const setAuthUserData = (userId: string | null, email: string | null, login: string | null) =>
+    ({type: "SET-USER-DATA", data: {userId, email, login}} as const);
 
 export const getAuthUserData = () => {
     return (dispatch: Dispatch<ActionsType>) => {
