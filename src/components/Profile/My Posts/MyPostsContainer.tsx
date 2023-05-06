@@ -3,6 +3,7 @@ import {addPost, setUserProfile, updatePostText} from "../../../redux/profileRed
 import MyPosts from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
+import {compose} from "redux";
 
 let mapStateToProps = (state: AppStateType) => {
     return {
@@ -18,8 +19,6 @@ let mapStateToProps = (state: AppStateType) => {
     }
 }*/
 
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {addPost, updatePostText}))(MyPosts);
 
-
-const MyPostsContainer = connect(mapStateToProps, {addPost, updatePostText})(MyPosts);
-
-export default MyPostsContainer;

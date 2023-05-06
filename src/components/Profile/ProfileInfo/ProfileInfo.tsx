@@ -1,7 +1,7 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
-import background from './ttt.webp'
 import Preloader from "../../common/Preloader/Preloader";
+import {ProfileStatus} from "./ProfileStatus";
 
 export type PropsType = {
     profile: any
@@ -14,13 +14,13 @@ const ProfileInfo = (props: PropsType) => {
     return (
         <div>
             <div>
-                <img className={s.backgroundImg}
+               {/* <img className={s.backgroundImg}
                      src={background}
-                     alt='background img'/>
+                     alt='background img'/>*/}
             </div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
-                ava+description
+                <ProfileStatus status={'Hello, my friends!'}/>
             </div>
         </div>
     );};
