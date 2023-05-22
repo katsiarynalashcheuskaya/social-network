@@ -4,13 +4,17 @@ import {AppStateType} from '../../redux/redux-store';
 import {
     follow, getUsers,
     setCurrentPage,
-    setIsFollowingInProgress, unFollow,
+    setIsFollowingInProgress, unFollow, UsersPageType,
     UserType
 } from '../../redux/usersReducer';
 import Users from './Users';
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
+
+/*type MapStatePropsType = {
+    usersPage: UsersPageType
+}*/
 
 export type UsersType = {
     users: UserType[]
@@ -61,7 +65,7 @@ let mapStateToProps = (state: AppStateType) => {
     }
 }
 
-export default compose<React.ComponentType>(
+export default compose<React.ComponentType >(
     connect(mapStateToProps, {
         follow, unFollow, setCurrentPage, setIsFollowingInProgress, getUsers
     }),
