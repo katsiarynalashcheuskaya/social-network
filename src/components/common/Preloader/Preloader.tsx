@@ -3,7 +3,7 @@ import icon from "../../../assets/images/icon.gif";
 import React from "react";
 
 const Preloader = () => {
-    return <img className={s.loadingIcon} src={icon}/>
+    return <img className={s.loadingIcon} src={icon} alt={'preloaderImg'}/>
 }
 
 export default Preloader;

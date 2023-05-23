@@ -13,13 +13,14 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
 
     activateEditMode = () => {
         this.setState({
+
             editMode: true
         })
     };
 
     deactivateEditMode = () => {
-        debugger;
         this.setState({
+
             editMode: false,
         })
         this.props.updateStatus(this.state.status)
@@ -33,6 +34,21 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
 
     saveStatusHandler = () => {
     }
+
+   componentDidUpdate(prevProps: Readonly<ProfileStatusType>, prevState: Readonly<ProfileStatusType>) {
+       //debugger;
+       console.log(this.state)
+        if (prevProps.status !== this.props.status) {
+            this.setState({status: this.props.status})
+        }
+        let a = this.state;
+        let b = this.props;
+       console.log('componentDidUpdate')
+   }
+
+    /*componentDidUpdate() {
+        console.log('componentDidUpdate')
+    }*/
 
     /*const [editMode, setEditMode] = useState<boolean>(false)
     const [status, setStatus] = useState<string>(props.status)
@@ -52,6 +68,7 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
     }*/
 
 render(){
+    console.log('render')
     return (
         <div>
             {!this.state.editMode &&

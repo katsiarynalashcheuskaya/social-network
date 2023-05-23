@@ -80,7 +80,7 @@ const usersReducer = (state: UsersPageType = initialState, action: ActionsType):
                 ...state,
                 followingInProgress: action.isFollowing
                     ? [...state.followingInProgress, action.userId]
-                    : state.followingInProgress.filter(id => id != action.userId)
+                    : state.followingInProgress.filter(id => id !== action.userId)
             }
         }
         default:

@@ -19,7 +19,7 @@ const initialState: ProfilePageType = {
     ],
     newPostText: '',
     profile: null,
-    status: ''
+    status: 'initial status'
 }
 
 /*export type ProfileType = {
@@ -54,6 +54,7 @@ const profileReducer = (state: ProfilePageType = initialState, action: ActionsTy
                 profile: action.profile
             }
         case "SET-STATUS":
+            console.log(action)
             return {
                 ...state,
                 status: action.status
@@ -80,16 +81,21 @@ export const setStatus = (status: string) => ({
 export const getUserProfile = (userId: number) => {
     return (dispatch: Dispatch<ActionsType>) => {
         dispatch(setIsFetching(true));
-        usersAPI.getProfile(userId).then(response =>
-            dispatch(setUserProfile(response.data)));
+        usersAPI.getProfile(userId).then(response =>{
+            dispatch(setUserProfile(response.data))
+        })
     }
 }
 
 export const getStatus = (userId: number) => {
     return (dispatch: Dispatch<ActionsType>) => {
         dispatch(setIsFetching(true));
-        profileAPI.getStatus(userId).then(response =>
-            dispatch(setStatus(response.data)));
+        profileAPI.getStatus(userId).then(response =>{
+
+            dispatch(setStatus(response.data))
+        })
+
+
     }
 }
 
@@ -97,8 +103,10 @@ export const updateStatus = (status: string) => {
     return (dispatch: Dispatch<ActionsType>) => {
         dispatch(setIsFetching(true));
         profileAPI.updateStatus(status).then(response => {
+            console.log(response)
             if (response.data.resultCode === 0) {
-                dispatch(setStatus(response.data));
+                console.log(response)
+                dispatch(setStatus(status));
             }
         })
     }

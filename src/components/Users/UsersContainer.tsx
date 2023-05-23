@@ -4,7 +4,7 @@ import {AppStateType} from '../../redux/redux-store';
 import {
     follow, getUsers,
     setCurrentPage,
-    setIsFollowingInProgress, unFollow, UsersPageType,
+    setIsFollowingInProgress, unFollow,
     UserType
 } from '../../redux/usersReducer';
 import Users from './Users';
